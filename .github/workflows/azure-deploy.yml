@@ -33,8 +33,9 @@ jobs:
         with:
           name: widget-app
 
+      # Unzip the artifact and overwrite files automatically
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip -o release.zip -d ./  # -o overwrites existing files without prompting
 
       # Login to Azure
       - name: Login to Azure
