@@ -33,8 +33,9 @@ jobs:
         with:
           name: widget-app
 
+      # Unzip the artifact and overwrite files automatically
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip -o release.zip -d ./  # -o overwrites existing files without prompting
 
       # Login to Azure
       - name: Login to Azure
@@ -43,6 +44,11 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
+          auth-type: 'SERVICE_PRINCIPAL'  # Ensures you're using the Service Principal for authentication
+          enable-AzPSSession: false  # Optional, if you're not using PowerShell for Azure tasks
+          environment: azurecloud  # Default Azure environment
+          allow-no-subscriptions: false
+          audience: api://AzureADTokenExchange  # Required for Azure service principal-based authentication
 
       # Deploy the widget to Azure Web App
       - name: 'Deploy to Azure Web App'
