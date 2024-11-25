@@ -68,4 +68,5 @@ jobs:
           app-name: 'widget-appbased-auth'
           slot-name: 'Production'
           package: .
+          continue-on-error: true
           
