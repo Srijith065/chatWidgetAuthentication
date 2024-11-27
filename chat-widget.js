@@ -1,4 +1,4 @@
-// EntraID Authentication
+// EntraID Authentication:
 (function (w, d) {
   const msalConfig = {
     auth: {
